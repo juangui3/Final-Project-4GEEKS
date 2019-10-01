@@ -13,24 +13,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-            users: [
-                {
-                username: "",
-                name:"",
-                profile:""
-                }
-            ]
+			users: [
+				{
+					username: "",
+					name: "",
+					profile: ""
+				}
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-            // registerUser: (username,name, profile)=>{
-            //     // fetch("fdsgjhdsdfsgsdhsdf){
-            //     //     MSInputMethodContextbody
-            //     // }
-            // },
+			// registerUser: (username,name, profile)=>{
+			//     // fetch("fdsgjhdsdfsgsdhsdf){
+			//     //     MSInputMethodContextbody
+			//     // }
+			// },
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

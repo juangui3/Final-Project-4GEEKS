@@ -5,6 +5,13 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
+import { Login } from "./views/login";
+import { Profile } from "./views/profile";
+import { Stock } from "./views/stock";
+import { Build } from "./views/build";
+import { Suggestions } from "./views/suggestions";
+import { History } from "./views/history";
+import { Help } from "./views/help";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -21,14 +28,20 @@ export class Layout extends React.Component {
 			<div className="d-flex flex-column h-100">
 				<BrowserRouter basename={basename}>
 					<ScrollToTop>
-						<Navbar />
 						<Switch>
-							<Route exact path="/" component={Home} />
+							<Route exact path="/" component={Login} />
 							<Route path="/demo" component={Demo} />
+							<Route path="/home" component={Home} />
+							<Route path="/profile" component={Profile} />
+							<Route path="/stock" component={Stock} />
+							<Route path="/build" component={Build} />
+							<Route path="/suggestions" component={Suggestions} />
+							<Route path="/history" component={History} />
+							<Route path="/help" component={Help} />
+							<Route path="/login" component={Login} />
 							<Route path="/single/:theid" component={Single} />
 							<Route render={() => <h1>Not found!</h1>} />
 						</Switch>
-						<Footer />
 					</ScrollToTop>
 				</BrowserRouter>
 			</div>
