@@ -22,6 +22,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			logout: () => {
+				setStore({ token: null, currentUserId: null });
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -31,19 +34,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//     //     MSInputMethodContextbody
 			//     // }
 			// },
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			onLogin: (email, password, history) => {
+				let settings = {
+					email: email,
+					password: password
+				};
+				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/login", {
+					method: "POST",
+					body: JSON.stringify(settings),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(data => {
+						if (data.msg == "User Already Exists") {
+							setStore({ errorStatus: data.msg });
+						}
+						setStore({ token: data.jwt, currentUserId: data.id });
+					})
+					.then(async () => {
+						let store = getStore();
+						const resp = await fetch(backend_url + "/profile", {
+							method: "POST",
+							body: JSON.stringify({
+								user_id: store.currentUserId
+							}),
+							headers: {
+								"Content-Type": "application/json",
+								authorization: "Bearer " + store.token
+							}
+						});
+						if (resp.status === 200) {
+							return resp.json();
+						} else {
+							throw new Error("Incorrect Profile usage");
+						}
+					})
+					.then(data => {
+						let store = getStore();
+						let profile = store.profile;
+						console.log(
+							"firstname" +
+								data.first_name +
+								" | " +
+								data.last_name +
+								" | " +
+								data.created_date +
+								" | " +
+								data.currentUserId
+						);
+						profile.first_name = data.first_name;
+						profile.last_name = data.last_name;
+						profile.createdDate = data.created_date;
+						profile.currentUserId = data.currentUserId;
+						setStore({ profile: profile });
+						history.push("/home");
+					})
+					.catch(error => {
+						console.log("PROFILE's ERROR: ", error);
+					});
 			}
 		}
 	};
