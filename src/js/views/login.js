@@ -38,7 +38,7 @@ export class Login extends React.Component {
 									Login
 								</button>
 							</Link>
-							<p className="forgot">Forgot password?</p>
+							<p className="forgot">Forgot password? | Sign Up</p>
 						</form>
 					</div>
 				</div>
