@@ -78,7 +78,7 @@ export class Navbar extends React.Component {
 									<DropdownItem divider />
 									<DropdownItem>API</DropdownItem>
 									<DropdownItem divider />
-									{store.token !== null ? (
+									{store.token !== undefined ? (
 										<Link to="/login">
 											<DropdownItem onClick={() => actions.logout()}>Logout</DropdownItem>
 										</Link>

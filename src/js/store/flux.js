@@ -54,6 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							setStore({ errorStatus: data.msg });
 						}
 						setStore({ token: data.jwt, currentUserId: data.id });
+						console.log(data.id);
 					})
 					.then(async () => {
 						let store = getStore();
@@ -76,7 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						let store = getStore();
 						let profile = store.profile;
-						console.log(
+						/*console.log(
 							"firstname" +
 								data.first_name +
 								" | " +
@@ -85,16 +86,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 								data.created_date +
 								" | " +
 								data.currentUserId
-						);
+						);*/
 						profile.first_name = data.first_name;
 						profile.last_name = data.last_name;
 						profile.createdDate = data.created_date;
 						profile.currentUserId = data.currentUserId;
 						setStore({ profile: profile });
-						history.push("/home");
 					})
 					.catch(error => {
-						console.log("PROFILE's ERROR: ", error);
+						/*console.log("PROFILE's ERROR: ", error);*/
+					})
+					.then(() => {
+						let store = getStore();
+						if (store.token !== undefined) {
+							history.push("/home");
+						}
 					});
 			}
 		}

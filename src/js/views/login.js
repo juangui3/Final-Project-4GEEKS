@@ -71,23 +71,10 @@ export class Login extends React.Component {
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD
-							<Link to="/home">
-								<button type="submit" className="btn btn-success btn-login">
-									Login
-								</button>
-							</Link>
-							<p className="forgot">Forgot password? | Sign Up</p>
-						</form>
-					</div>
-				</div>
-			</div>
-=======
 						</React.Fragment>
 					);
 				}}
 			</Context.Consumer>
->>>>>>> 3ead70c53b70237fc4875efeebf9e74912eb991a
 		);
 	}
 }
