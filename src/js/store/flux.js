@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
 			demo: [
 				{
 					title: "FIRST",
@@ -22,6 +23,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			buildStock: myStock => {
+				console.log("myStock", myStock);
+				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/add_stock", {
+					method: "POST",
+					body: JSON.stringify(myStock),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(response => {
+					return response.json();
+				});
+			},
 			logout: () => {
 				setStore({ token: null, currentUserId: null });
 			},
@@ -34,6 +47,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//     //     MSInputMethodContextbody
 			//     // }
 			// },
+
+			// showDiv: () => {
+			// document.getElementById("login-alert").style.display = "block";
+			// },
+
 			onLogin: (email, password, history) => {
 				let settings = {
 					email: email,
@@ -54,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							setStore({ errorStatus: data.msg });
 						}
 						setStore({ token: data.jwt, currentUserId: data.id });
-						console.log(data.id);
+						/*console.log(data.id);*/
 					})
 					.then(async () => {
 						let store = getStore();

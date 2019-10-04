@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Alert } from "reactstrap";
 import LogoBlack from "../../img/LogoBlack.png";
 import Quote1 from "../../img/Quote1.png";
 import "../../styles/login.scss";
@@ -56,17 +56,25 @@ export class Login extends React.Component {
 											<button
 												type="button"
 												className="btn btn-success btn-login"
-												onClick={() =>
-													actions.onLogin(
-														this.state.email,
-														this.state.password,
-														this.props.history
-													)
+												onClick={
+													() =>
+														actions.onLogin(
+															this.state.email,
+															this.state.password,
+															this.props.history
+														)
+													//actions.showDiv()
 												}>
 												Login
 											</button>
 
 											<p className="forgot">Forgot password? | Sign Up</p>
+
+											{store.token === undefined && (
+												<div id="login-alert">
+													<Alert color="danger">User does not exist!</Alert>
+												</div>
+											)}
 										</form>
 									</div>
 								</div>

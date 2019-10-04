@@ -3,8 +3,14 @@ import LogoBlack from "../../img/LogoBlack.png";
 import "../../styles/build.scss";
 import { Navbar } from "../component/navbar";
 import { Footer } from "../component/footer";
+import { Context } from "../store/appContext";
 
 export class Build extends React.Component {
+	constructor(props) {
+		super(props);
+		// No llames this.setState() aquí!
+		this.state = { stock: [] };
+	}
 	render() {
 		return (
 			<React.Fragment>
@@ -30,53 +36,60 @@ export class Build extends React.Component {
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Beans</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Rice</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Pasta</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Onions</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Tomatoes</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Eggs</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Chicken</td>
-										</tr>
+										<Context.Consumer>
+											{({ store, actions }) => {
+												{
+													if (store.ingredients) {
+														return store.ingredients.map((item, index) => {
+															return (
+																<tr key={index}>
+																	<th scope="row">
+																		<input
+																			onChange={e =>
+																				this.setState({
+																					stock: this.state.stock.concat({
+																						id_ingrediente: item.id,
+																						id_profile: store.currentUserId,
+																						quantity: "1"
+																					})
+																				})
+																			}
+																			type="checkbox"
+																			aria-label="Checkbox for following text input"
+																		/>
+																	</th>
+																	<td>{item.name}</td>
+																</tr>
+															);
+														});
+													} else {
+														<tr>
+															<th scope="row">
+																<input
+																	type="checkbox"
+																	aria-label="Checkbox for following text input"
+																/>
+															</th>
+															<td>Loading ...</td>
+														</tr>;
+													}
+												}
+											}}
+										</Context.Consumer>
 									</tbody>
 								</table>
-								<button type="submit" className="btn btn-success btn-add">
-									Add <i className="fas fa-arrow-circle-right" />
-								</button>
+								<Context.Consumer>
+									{({ store, actions }) => {
+										return (
+											<button
+												onClick={() => actions.buildStock(this.state.stock)}
+												type="submit"
+												className="btn btn-success btn-add">
+												Add <i className="fas fa-arrow-circle-right" />
+											</button>
+										);
+									}}
+								</Context.Consumer>
 							</div>
 							<div className="col border rounded my-col-ing-stock">
 								<h3>My Stock</h3>
@@ -90,24 +103,23 @@ export class Build extends React.Component {
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Breads</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Fish</td>
-										</tr>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" aria-label="Checkbox for following text input" />
-											</th>
-											<td>Milk</td>
-										</tr>
+										<Context.Consumer>
+											{({ store, actions }) => {
+												return this.state.stock.map((item, index) => {
+													return (
+														<tr key={index}>
+															<th scope="row">
+																<input
+																	type="checkbox"
+																	aria-label="Checkbox for following text input"
+																/>
+															</th>
+															<td>{item.ingredient}</td>
+														</tr>
+													);
+												});
+											}}
+										</Context.Consumer>
 									</tbody>
 								</table>
 								<button type="button" className="btn btn-danger btn-remove">
