@@ -25,6 +25,8 @@
     background: white;
     padding-top: 40px;
     padding-bottom: 40px;
+    height: 500px;
+    overflow: scroll;
 }
 
 .btn-remove {
@@ -41,4 +43,12 @@
 
 .my-h3-titles {
     margin-bottom: 1%;
+}
+
+.btns-build {
+    margin-left: 10px;
+}
+
+.search-input {
+margin-left: 25%;
 }

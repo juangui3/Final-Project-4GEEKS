@@ -32,7 +32,15 @@ export class Build extends React.Component {
 											<th scope="col" className="select-checkbox">
 												Select
 											</th>
-											<th scope="col">Ingredients</th>
+											<th scope="col">
+												Ingredients{" "}
+												<input
+													className="search-input"
+													type="text"
+													name="search"
+													placeholder="Search..."
+												/>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -78,19 +86,22 @@ export class Build extends React.Component {
 										</Context.Consumer>
 									</tbody>
 								</table>
-								<Context.Consumer>
-									{({ store, actions }) => {
-										return (
-											<button
-												onClick={() => actions.buildStock(this.state.stock)}
-												type="submit"
-												className="btn btn-success btn-add">
-												Add <i className="fas fa-arrow-circle-right" />
-											</button>
-										);
-									}}
-								</Context.Consumer>
+								<div className="row btns-build">
+									<Context.Consumer>
+										{({ store, actions }) => {
+											return (
+												<button
+													onClick={() => actions.buildStock(this.state.stock)}
+													type="submit"
+													className="btn btn-success btn-add">
+													Add <i className="fas fa-arrow-circle-right" />
+												</button>
+											);
+										}}
+									</Context.Consumer>
+								</div>
 							</div>
+
 							<div className="col border rounded my-col-ing-stock">
 								<h3>My Stock</h3>
 								<table className="table table-hover">
@@ -99,13 +110,21 @@ export class Build extends React.Component {
 											<th scope="col" className="select-checkbox">
 												Select
 											</th>
-											<th scope="col">Ingredients</th>
+											<th scope="col">
+												Ingredients{" "}
+												<input
+													className="search-input"
+													type="text"
+													name="search"
+													placeholder="Search..."
+												/>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<Context.Consumer>
 											{({ store, actions }) => {
-												return this.state.stock.map((item, index) => {
+												return store.userStock.map((item, index) => {
 													return (
 														<tr key={index}>
 															<th scope="row">
@@ -114,7 +133,7 @@ export class Build extends React.Component {
 																	aria-label="Checkbox for following text input"
 																/>
 															</th>
-															<td>{item.ingredient}</td>
+															<td>{item.name}</td>
 														</tr>
 													);
 												});
@@ -130,6 +149,7 @@ export class Build extends React.Component {
 								</button>
 							</div>
 						</div>
+
 						{/*<div className="card mb-3 my-build-receipt">
 							<img
 								className="card-img-top"

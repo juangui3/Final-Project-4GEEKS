@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
+			userStock: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -31,8 +32,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {
 						"Content-Type": "application/json"
 					}
-				}).then(response => {
-					return response.json();
+				}).then(() => {
+					fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/stock/")
+						.then(response => response.json())
+						.then(data => {
+							setStore({ userStock: data });
+							console.log("Hola " + data);
+						});
 				});
 			},
 			logout: () => {
