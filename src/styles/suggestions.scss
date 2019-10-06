@@ -6,3 +6,25 @@
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
+.btn-filter-sug {
+    color: white;
+        background-color: #28A745;
+    border-color: #28A745;
+}
+
+.btn-filter-sug::after {
+    color: white;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #28A745;
+    border-color: #28A745;
+}
+
+.btn-filter-sug:hover {
+        color: white;
+        background-color: #28A745;
+    border-color: #28A745;
+}

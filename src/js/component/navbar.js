@@ -81,7 +81,9 @@ export class Navbar extends React.Component {
 										<DropdownItem>Help</DropdownItem>
 									</Link>
 									<DropdownItem divider />
-									<DropdownItem>API</DropdownItem>
+									<Link to="/scan">
+										<DropdownItem>Scan</DropdownItem>
+									</Link>
 									<DropdownItem divider />
 									{store.token !== undefined ? (
 										<Link to="/login">

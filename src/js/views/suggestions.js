@@ -33,7 +33,9 @@ export class Suggestions extends React.Component {
 						</div>
 						<div className="container cont-suggestions">
 							<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-								<DropdownToggle caret>Filter Recipes by</DropdownToggle>
+								<DropdownToggle caret className="btn-filter-sug">
+									Filter Recipes by
+								</DropdownToggle>
 								<DropdownMenu>
 									<DropdownItem>Calories</DropdownItem>
 									<DropdownItem>Ingredients</DropdownItem>
