@@ -68,7 +68,15 @@ export class Login extends React.Component {
 												Login
 											</button>
 
-											<p className="forgot">Forgot password? | Sign Up</p>
+											<p className="forgot">
+												<Link className="fp" to="/profile">
+													Forgot password?
+												</Link>{" "}
+												|{" "}
+												<Link className="fp" to="/profile">
+													Sign Up?
+												</Link>
+											</p>
 
 											{store.token === undefined && (
 												<div id="login-alert">

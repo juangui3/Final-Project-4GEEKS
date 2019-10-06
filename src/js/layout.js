@@ -12,6 +12,7 @@ import { Build } from "./views/build";
 import { Suggestions } from "./views/suggestions";
 import { History } from "./views/history";
 import { Help } from "./views/help";
+import { Items } from "./views/items";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -39,6 +40,7 @@ export class Layout extends React.Component {
 							<Route path="/history" component={History} />
 							<Route path="/help" component={Help} />
 							<Route path="/login" component={Login} />
+							<Route path="/items" component={Items} />
 							<Route path="/single/:theid" component={Single} />
 							<Route render={() => <h1>Not found!</h1>} />
 						</Switch>
