@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			userStock: [],
+			userReceta: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -33,7 +34,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				}).then(() => {
-					fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/stock/")
+					fetch(
+						"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/stock/" +
+							myStock[0].id_profile
+					)
 						.then(response => response.json())
 						.then(data => {
 							setStore({ userStock: data });
@@ -41,6 +45,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 						});
 				});
 			},
+
+			deleteStock: myDelete => {
+				console.log("myDelete", myDelete);
+				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/delete_stock", {
+					method: "DELETE",
+					body: JSON.stringify(myDelete),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(() => {
+					fetch(
+						"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/stock/" +
+							myDelete[0].id_profile
+					)
+						.then(response => response.json())
+						.then(data => {
+							setStore({ userStock: data });
+							console.log("Hola Stock" + data);
+						});
+				});
+			},
+
+			generateReceta: myStock => {
+				console.log("generarReceta", myStock);
+				fetch(
+					"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/recetafiltro/" +
+						myStock[0].id_profile
+				)
+					.then(response => response.json())
+					.then(data => {
+						setStore({ userReceta: data });
+						console.log("Hola Receta" + data);
+					});
+			},
+
 			logout: () => {
 				setStore({ token: null, currentUserId: null });
 			},
