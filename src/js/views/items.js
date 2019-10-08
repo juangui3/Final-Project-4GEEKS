@@ -61,23 +61,9 @@ export class Items extends React.Component {
 															return store.ingredients.map((item, index) => {
 																return (
 																	<tr key={index}>
-																		<th scope="row">
-																			<input
-																				onChange={e =>
-																					this.setState({
-																						stock: this.state.stock.concat({
-																							id_ingrediente: item.id,
-																							id_profile:
-																								store.currentUserId,
-																							quantity: "1"
-																						})
-																					})
-																				}
-																				type="checkbox"
-																				aria-label="Checkbox for following text input"
-																			/>
-																		</th>
-																		<td>{item.name}</td>
+																		<td scope="row">{item.name}</td>
+																		<td>Show Price Here</td>
+																		<td>Show Supermarket Here</td>
 																	</tr>
 																);
 															});

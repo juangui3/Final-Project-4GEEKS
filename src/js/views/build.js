@@ -10,7 +10,7 @@ export class Build extends React.Component {
 	constructor(props) {
 		super(props);
 		// No llames this.setState() aquí!
-		this.state = { stock: [] };
+		this.state = { stock: [], stockDelete: [] };
 	}
 	render() {
 		return (
@@ -106,11 +106,20 @@ export class Build extends React.Component {
 														<tr key={index}>
 															<th scope="row">
 																<input
+																	onChange={e =>
+																		this.setState({
+																			stockDelete: this.state.stockDelete.concat({
+																				id_stock: item.id,
+																				id_profile: store.currentUserId
+																				//quantity: "1"
+																			})
+																		})
+																	}
 																	type="checkbox"
 																	aria-label="Checkbox for following text input"
 																/>
 															</th>
-															<td>{item.name}</td>
+															<td>{item.ingredienteTemp["name"]}</td>
 														</tr>
 													);
 												});
@@ -142,12 +151,31 @@ export class Build extends React.Component {
 							</div>
 							<div className="col">
 								<div className="row btns-build">
-									<button type="button" className="btn btn-danger btn-remove">
-										Remove <i className="fas fa-trash-alt" />
-									</button>
-									<button type="button" className="btn btn-success btn-add">
-										Generate <i className="fas fa-utensils" />
-									</button>
+									<Context.Consumer>
+										{({ store, actions }) => {
+											return (
+												<button
+													type="button"
+													onClick={() => actions.deleteStock(this.state.stockDelete)}
+													className="btn btn-danger btn-remove">
+													Remove <i className="fas fa-trash-alt" />
+												</button>
+											);
+										}}
+									</Context.Consumer>
+
+									<Context.Consumer>
+										{({ store, actions }) => {
+											return (
+												<button
+													type="button"
+													onClick={() => actions.generateReceta(this.state.stock)}
+													className="btn btn-success btn-add">
+													Generate <i className="fas fa-utensils" />
+												</button>
+											);
+										}}
+									</Context.Consumer>
 								</div>
 							</div>
 						</div>
@@ -158,16 +186,39 @@ export class Build extends React.Component {
 							<h3>Generated Recipes</h3>
 						</div>
 					</div>
-					<div className="container my-build-gen">
-						<div className="row">
-							<div className="col history-col">
-								<Recipe />
-							</div>
-							<div className="col history-col">
-								<Recipe />
-							</div>
-						</div>
-					</div>
+
+					<Context.Consumer>
+						{({ store, actions }) => {
+							return store.userReceta.map((item, index) => {
+								return (
+									<tr key={index}>
+										<div className="container my-build-gen" />
+
+										<div className="row">
+											<div className="col history-col">
+												<div className="col-sm-12">
+													<div className="card">
+														<div className="card-body">
+															<img
+																className="card-img-top image-class"
+																src={item.image}
+																alt="Card image cap"
+															/>
+															<h5 className="card-title my-title-card">{item.name}</h5>
+															<p className="card-text">{item.guianew}</p>
+															<a href="#" className="btn btn-success">
+																Download <i className="fas fa-download" />
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</tr>
+								);
+							});
+						}}
+					</Context.Consumer>
 				</div>
 				<Footer />
 			</React.Fragment>

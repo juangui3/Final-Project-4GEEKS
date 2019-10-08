@@ -155,7 +155,15 @@ export class Scan extends React.Component {
 									<thead>
 										<tr>
 											<th scope="col">Update</th>
-											<th scope="col">Product</th>
+											<th scope="col">
+												Product{" "}
+												<input
+													className="search-input"
+													type="text"
+													name="search"
+													placeholder="Search..."
+												/>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -167,19 +175,11 @@ export class Scan extends React.Component {
 															return (
 																<tr key={index}>
 																	<th scope="row">
-																		<input
-																			onChange={e =>
-																				this.setState({
-																					stock: this.state.stock.concat({
-																						id_ingrediente: item.id,
-																						id_profile: store.currentUserId,
-																						quantity: "1"
-																					})
-																				})
-																			}
-																			type="checkbox"
-																			aria-label="Checkbox for following text input"
-																		/>
+																		<button
+																			type="button"
+																			className="btn btn-success btn-sm">
+																			<i className="fas fa-arrow-left" /> Add
+																		</button>
 																	</th>
 																	<td>{item.name}</td>
 																</tr>
