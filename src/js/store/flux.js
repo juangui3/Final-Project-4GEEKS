@@ -44,20 +44,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				setStore({ token: null, currentUserId: null });
 			},
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			isButtonEnabled: (first_name, last_name, email, password) => {
+				return first_name === "" || last_name === "" || email === "" || password === "";
 			},
-			// registerUser: (username,name, profile)=>{
-			//     // fetch("fdsgjhdsdfsgsdhsdf){
-			//     //     MSInputMethodContextbody
-			//     // }
-			// },
-
-			// showDiv: () => {
-			// document.getElementById("login-alert").style.display = "block";
-			// },
-
 			onLogin: (email, password, history) => {
 				let settings = {
 					email: email,

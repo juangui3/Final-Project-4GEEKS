@@ -73,7 +73,7 @@ export class Login extends React.Component {
 													Forgot password?
 												</Link>{" "}
 												|{" "}
-												<Link className="fp" to="/profile">
+												<Link className="fp" to="/signup">
 													Sign Up?
 												</Link>
 											</p>

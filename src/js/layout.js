@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
+import { SignUp } from "./views/signup";
 import { Single } from "./views/single";
 import { Login } from "./views/login";
 import { Profile } from "./views/profile";
@@ -34,6 +35,7 @@ export class Layout extends React.Component {
 							<Route exact path="/" component={Login} />
 							<Route path="/demo" component={Demo} />
 							<Route path="/home" component={Home} />
+							<Route path="/signup" component={SignUp} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/stock" component={Stock} />
 							<Route path="/build" component={Build} />
