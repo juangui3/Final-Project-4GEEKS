@@ -16,7 +16,7 @@ export class Build extends React.Component {
 		return (
 			<React.Fragment>
 				<Navbar />
-				<div className="background">
+				<div className="background in-build">
 					<div className="container my-build">
 						<div className="col build-my-meal">
 							<h1>Build My Meal</h1>
@@ -181,44 +181,66 @@ export class Build extends React.Component {
 						</div>
 					</div>
 
-					<div className="row my-build-receipt">
-						<div className="container my-h3-titles">
+					<div className="row my-build-receipt ">
+						<div className="container my-h3-titles my-gen-rec">
 							<h3>Generated Recipes</h3>
 						</div>
 					</div>
 
-					<Context.Consumer>
-						{({ store, actions }) => {
-							return store.userReceta.map((item, index) => {
-								return (
-									<tr key={index}>
-										<div className="container my-build-gen" />
+					<div className="container my-recipes-build">
+						<div className="row justify-content-md-center">
+							<div className="col-6">
+								<Context.Consumer>
+									{({ store, actions }) => {
+										return store.userReceta.map((item, index) => {
+											return (
+												<tr key={index}>
+													<div className="container my-build-gen" />
 
-										<div className="row">
-											<div className="col history-col">
-												<div className="col-sm-12">
-													<div className="card">
-														<div className="card-body">
-															<img
-																className="card-img-top image-class"
-																src={item.image}
-																alt="Card image cap"
-															/>
-															<h5 className="card-title my-title-card">{item.name}</h5>
-															<p className="card-text">{item.guianew}</p>
-															<a href="#" className="btn btn-success">
-																Download <i className="fas fa-download" />
-															</a>
+													<div className="row">
+														<div className="col history-col">
+															<div className="col-sm-12">
+																<div className="card">
+																	<div className="card-body">
+																		<img
+																			className="card-img-top image-class mx-auto d-block"
+																			src={item.image}
+																			alt="Card image cap"
+																		/>
+																		<h5 className="card-title my-title-card">
+																			{item.name}
+																		</h5>
+																		<p className="card-text my-rec-text">
+																			{item.guianew}
+																		</p>
+																		<p className="card-text font-weight-bold my-rec-calory">
+																			Calories: {item.calory}
+																		</p>
+																		<p className="card-text font-weight-bold my-rec-calory">
+																			Prices at:
+																		</p>
+																		<p className="card-text font-weight-bold my-rec-calory">
+																			Walmart: {item.calory}, Publix:{" "}
+																			{item.calory}, President: {item.calory}
+																		</p>
+																		<a
+																			href="#"
+																			className="btn btn-success btn-block">
+																			Download <i className="fas fa-download" />
+																		</a>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-									</tr>
-								);
-							});
-						}}
-					</Context.Consumer>
+												</tr>
+											);
+										});
+									}}
+								</Context.Consumer>
+							</div>
+						</div>
+					</div>
 				</div>
 				<Footer />
 			</React.Fragment>
