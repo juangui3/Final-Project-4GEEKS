@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			userStock: [],
 			userReceta: [],
+			userIngrediente: [{ calory: 0, id: "", name: "" }],
 			demo: [
 				{
 					title: "FIRST",
@@ -78,6 +79,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ userReceta: data });
 						console.log("Hola Receta" + data);
 					});
+			},
+
+			ingredientePrecio: myIngrediente => {
+				console.log("myIngrediente", myIngrediente);
+				fetch(
+					"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/ingredienteId/" + myIngrediente
+				)
+					.then(response => response.json())
+					.then(data => {
+						setStore({ userIngrediente: data });
+						console.log("Hola Ingrediente" + data);
+					});
+			},
+
+			savePrecio: myPrecio => {
+				console.log("myPrecio", myPrecio);
+				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/add_precio", {
+					method: "POST",
+					body: JSON.stringify(myPrecio),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				});
 			},
 
 			logout: () => {
