@@ -43,6 +43,7 @@ margin-bottom: 1%;
 
 .my-title-card {
     margin-top: 3%;
+    text-align: center;
 }
 
 .my-h3-titles {
@@ -65,4 +66,12 @@ border-radius: 4px;
  padding: 5px;
  width: 300px;
 
+}
+
+.my-gen-rec, .my-rec-text, .my-rec-calory {
+    text-align: center;
+}
+
+.in-build {
+    padding-bottom: 5%;
 }
