@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			userStock: [],
 			userReceta: [],
+			userRecetaCaloria: [],
 			userIngrediente: [{ calory: 0, id: "", name: "" }],
 			demo: [
 				{
@@ -27,7 +28,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			buildStock: myStock => {
-				console.log("myStock", myStock);
 				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/add_stock", {
 					method: "POST",
 					body: JSON.stringify(myStock),
@@ -42,13 +42,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(response => response.json())
 						.then(data => {
 							setStore({ userStock: data });
-							console.log("Hola " + data);
 						});
 				});
 			},
 
 			deleteStock: myDelete => {
-				console.log("myDelete", myDelete);
 				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/delete_stock", {
 					method: "DELETE",
 					body: JSON.stringify(myDelete),
@@ -63,13 +61,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(response => response.json())
 						.then(data => {
 							setStore({ userStock: data });
-							console.log("Hola Stock" + data);
 						});
 				});
 			},
 
 			generateReceta: myStock => {
-				console.log("generarReceta", myStock);
 				fetch(
 					"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/recetafiltro/" +
 						myStock[0].id_profile
@@ -77,24 +73,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						setStore({ userReceta: data });
-						console.log("Hola Receta" + data);
+					});
+			},
+
+			recetaCaloria: () => {
+				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/recetacalorias/")
+					.then(response => response.json())
+					.then(data => {
+						setStore({ userRecetaCaloria: data });
 					});
 			},
 
 			ingredientePrecio: myIngrediente => {
-				console.log("myIngrediente", myIngrediente);
 				fetch(
 					"https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/ingredienteId/" + myIngrediente
 				)
 					.then(response => response.json())
 					.then(data => {
 						setStore({ userIngrediente: data });
-						console.log("Hola Ingrediente" + data);
 					});
 			},
 
 			savePrecio: myPrecio => {
-				console.log("myPrecio", myPrecio);
 				fetch("https://3000-d0bb3e54-e3d5-4122-8b7a-3b99d2325a27.ws-us1.gitpod.io/add_precio", {
 					method: "POST",
 					body: JSON.stringify(myPrecio),

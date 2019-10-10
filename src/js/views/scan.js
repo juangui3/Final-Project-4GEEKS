@@ -17,7 +17,6 @@ export class Scan extends React.Component {
 		this.setState({
 			id_ingrediente: event.target.value
 		});
-		console.log("barcode" + this.state.barcode);
 	}
 
 	handleChangePrecio(event) {
